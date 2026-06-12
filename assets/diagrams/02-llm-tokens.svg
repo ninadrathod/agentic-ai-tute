@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 340" role="img" aria-labelledby="title desc">
+  <title id="title">How LLMs process tokens</title>
+  <desc id="desc">Text split into tokens, fed to LLM, next token predicted with probabilities</desc>
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#6366f1"/></marker>
+  </defs>
+  <rect width="900" height="340" fill="#f8fafc" rx="12"/>
+  <text x="450" y="36" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" font-weight="700" fill="#0f172a">Text ’ Tokens ’ LLM ’ Next token</text>
+  <!-- Input text -->
+  <text x="80" y="90" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#64748b">INPUT TEXT</text>
+  <rect x="40" y="100" width="200" height="50" rx="8" fill="#fff" stroke="#cbd5e1"/>
+  <text x="140" y="132" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" fill="#334155">"Fix the failing test"</text>
+  <!-- Arrow -->
+  <path d="M 250 125 L 290 125" stroke="#6366f1" stroke-width="2" marker-end="url(#arr)"/>
+  <!-- Tokens -->
+  <text x="370" y="90" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#64748b">TOKENS</text>
+  <g font-family="ui-monospace,monospace" font-size="11">
+    <rect x="300" y="108" width="48" height="34" rx="6" fill="#eef2ff" stroke="#818cf8"/><text x="324" y="130" text-anchor="middle" fill="#4338ca">Fix</text>
+    <rect x="354" y="108" width="48" height="34" rx="6" fill="#eef2ff" stroke="#818cf8"/><text x="378" y="130" text-anchor="middle" fill="#4338ca">the</text>
+    <rect x="408" y="108" width="56" height="34" rx="6" fill="#eef2ff" stroke="#818cf8"/><text x="436" y="130" text-anchor="middle" fill="#4338ca">fail</text>
+    <rect x="470" y="108" width="48" height="34" rx="6" fill="#eef2ff" stroke="#818cf8"/><text x="494" y="130" text-anchor="middle" fill="#4338ca">ing</text>
+    <rect x="524" y="108" width="48" height="34" rx="6" fill="#eef2ff" stroke="#818cf8"/><text x="548" y="130" text-anchor="middle" fill="#4338ca">test</text>
+  </g>
+  <path d="M 580 125 L 620 125" stroke="#6366f1" stroke-width="2" marker-end="url(#arr)"/>
+  <!-- LLM box -->
+  <rect x="630" y="85" width="120" height="80" rx="12" fill="#4f46e5"/>
+  <text x="690" y="118" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" font-weight="700" fill="#fff">LLM</text>
+  <text x="690" y="138" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#c7d2fe">predicts next</text>
+  <text x="690" y="152" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#c7d2fe">token</text>
+  <!-- Probabilities -->
+  <text x="450" y="210" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#64748b">TOP NEXT-TOKEN PROBABILITIES</text>
+  <g font-family="system-ui,sans-serif" font-size="11">
+    <text x="120" y="240" fill="#334155">"case"</text><rect x="170" y="228" width="180" height="16" rx="4" fill="#e2e8f0"/><rect x="170" y="228" width="162" height="16" rx="4" fill="#10b981"/><text x="360" y="240" fill="#047857" font-weight="600">90%</text>
+    <text x="120" y="268" fill="#334155">"assertion"</text><rect x="170" y="256" width="180" height="16" rx="4" fill="#e2e8f0"/><rect x="170" y="256" width="36" height="16" rx="4" fill="#6366f1"/><text x="360" y="268" fill="#4338ca">20%</text>
+    <text x="120" y="296" fill="#334155">"banana"</text><rect x="170" y="284" width="180" height="16" rx="4" fill="#e2e8f0"/><rect x="170" y="284" width="5" height="16" rx="4" fill="#f87171"/><text x="360" y="296" fill="#dc2626">3%</text>
+  </g>
+  <rect x="500" y="220" width="340" height="90" rx="8" fill="#fff" stroke="#cbd5e1"/>
+  <text x="520" y="245" font-family="system-ui,sans-serif" font-size="11" fill="#64748b">Output continues one token at a time:</text>
+  <text x="520" y="270" font-family="ui-monospace,monospace" font-size="12" fill="#334155">"Fix the failing test </text>
+  <text x="688" y="270" font-family="ui-monospace,monospace" font-size="12" fill="#10b981" font-weight="700">case</text>
+  <text x="730" y="270" font-family="ui-monospace,monospace" font-size="12" fill="#94a3b8">..."</text>
+  <text x="520" y="295" font-family="system-ui,sans-serif" font-size="10" fill="#94a3b8">LLM alone outputs text  tools are added for CI/CD actions</text>
+</svg>

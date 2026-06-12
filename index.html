@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agentic AI in CI/CD — A Beginner's Tutorial</title>
+  <meta name="description" content="A comprehensive, beginner-friendly single-page tutorial on Agentic AI in the context of CI/CD. Covers AI, LLMs, prompts, context, RAG, memory, MCP, hooks, MVPs and popular tools, with 100 interactive quiz questions." />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc',
+              400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca',
+              800: '#3730a3', 900: '#312e81'
+            }
+          },
+          fontFamily: {
+            sans: ['ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Minimal custom CSS — most styling is handled by Tailwind utilities */
+    html { scroll-padding-top: 6rem; }
+    [id] { scroll-margin-top: 6rem; }
+    /* Accordion chevron rotation */
+    details[open] .q-chevron { transform: rotate(180deg); }
+    .q-chevron { transition: transform .2s ease; }
+    /* Hide native marker */
+    summary::-webkit-details-marker { display: none; }
+    summary { list-style: none; }
+    /* Smooth slide-out menu */
+    #mobileSidebar { transition: transform .25s ease; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-brand-200/60">
+
+  <!-- Reading progress bar -->
+  <div class="fixed top-0 left-0 right-0 z-50 h-1 bg-transparent">
+    <div id="progressBar" class="h-full w-0 bg-gradient-to-r from-brand-500 to-emerald-400 transition-[width] duration-150"></div>
+  </div>
+
+  <!-- ===================== MOBILE TOP BAR ===================== -->
+  <header class="lg:hidden sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-slate-200">
+    <div class="flex items-center justify-between px-4 h-14">
+      <a href="#top" class="flex items-center gap-2 font-semibold text-slate-900">
+        <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600 text-white text-sm font-bold">AI</span>
+        <span>Agentic AI · CI/CD</span>
+      </a>
+      <button id="menuToggle" aria-label="Open navigation" aria-expanded="false"
+        class="inline-flex items-center justify-center h-10 w-10 rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-100">
+        <svg id="iconMenu" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile slide-out overlay -->
+  <div id="overlay" class="fixed inset-0 z-40 hidden bg-slate-900/40 backdrop-blur-sm lg:hidden"></div>
+
+  <!-- Mobile slide-out sidebar -->
+  <aside id="mobileSidebar" class="fixed inset-y-0 left-0 z-50 w-80 max-w-[85%] -translate-x-full bg-white shadow-xl lg:hidden overflow-y-auto">
+    <div class="flex items-center justify-between px-4 h-14 border-b border-slate-200">
+      <span class="font-semibold text-slate-900">Contents</span>
+      <button id="menuClose" aria-label="Close navigation" class="h-9 w-9 inline-flex items-center justify-center rounded-lg hover:bg-slate-100">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <nav id="mobileNav" class="p-3 text-sm"></nav>
+  </aside>
+
+  <a id="top"></a>
+
+  <!-- ===================== PAGE GRID ===================== -->
+  <div class="mx-auto max-w-screen-2xl lg:grid lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-8 px-4 lg:px-8">
+
+    <!-- ===================== DESKTOP STICKY SIDEBAR ===================== -->
+    <aside class="hidden lg:block">
+      <div class="sticky top-6 max-h-[calc(100vh-3rem)] overflow-y-auto pr-2 py-6">
+        <a href="#top" class="flex items-center gap-2 font-semibold text-slate-900 mb-1">
+          <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-brand-600 text-white text-sm font-bold">AI</span>
+          <span class="leading-tight">Agentic AI<br><span class="text-xs font-normal text-slate-500">in CI/CD · Beginner Tutorial</span></span>
+        </a>
+        <p class="text-xs text-slate-400 mt-4 mb-2 uppercase tracking-wider font-semibold">Table of Contents</p>
+        <nav id="desktopNav" class="text-sm space-y-0.5"></nav>
+        <div class="mt-6 rounded-xl bg-brand-50 ring-1 ring-brand-100 p-4">
+          <p class="text-xs font-semibold text-brand-700">Quiz progress</p>
+          <p id="quizScore" class="text-2xl font-bold text-brand-700 mt-1">0 / 100</p>
+          <p class="text-xs text-brand-600/80 mt-1">Questions reviewed</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ===================== MAIN CONTENT ===================== -->
+    <main class="py-8 lg:py-12 min-w-0">
+
+      <!-- HERO -->
+      <section class="mb-12">
+        <span class="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700 ring-1 ring-emerald-200">Beginner friendly · No code required to start</span>
+        <h1 class="mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900">
+          Agentic AI in <span class="bg-gradient-to-r from-brand-600 to-emerald-500 bg-clip-text text-transparent">CI/CD</span>
+        </h1>
+        <p class="mt-4 max-w-3xl text-lg text-slate-600">
+          A complete, plain-English journey from "what is AI?" all the way to AI agents that build, test, and ship software automatically. Learn the vocabulary, the building blocks, and how it all comes together — then test yourself with <strong>100 interactive questions</strong>.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3 text-sm">
+          <a href="#prerequisites" class="rounded-lg bg-brand-600 px-4 py-2 font-medium text-white shadow-sm hover:bg-brand-700">Start learning →</a>
+          <a href="#mvp-tools" class="rounded-lg bg-white px-4 py-2 font-medium text-slate-700 ring-1 ring-slate-200 hover:bg-slate-100">Jump to tools</a>
+        </div>
+      </section>
+
+      <!-- SECTIONS GET INSERTED HERE -->
+
+      <!-- ===================== SECTION 1 ===================== -->
+      <section id="prerequisites" class="mb-16" data-section data-title="Prerequisites &amp; What is AI?">
+        <div class="flex items-center gap-3">
+          <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 text-white text-sm font-bold">01</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Prerequisites &amp; What is AI?</h2>
+        </div>
+
+        <div class="prose prose-slate max-w-none mt-5 text-slate-700 leading-relaxed space-y-4">
+          <h3 class="text-lg font-semibold text-slate-900">What you need before you start</h3>
+          <p>Good news: this tutorial assumes <strong>zero programming experience</strong>. You only need three things:</p>
+          <ul class="list-disc pl-6 space-y-1">
+            <li><strong>Curiosity.</strong> If you can use a web browser and type a message into a chat box, you are ready.</li>
+            <li><strong>A web browser.</strong> Chrome, Edge, Safari, or Firefox — anything modern works.</li>
+            <li><strong>Optional: a free AI account.</strong> Something like ChatGPT, Claude, or Gemini, so you can try ideas as you read. Not required, but it makes concepts "click" faster.</li>
+          </ul>
+          <p>Two words will appear a lot. Let's define them in the simplest way possible:</p>
+          <ul class="list-disc pl-6 space-y-1">
+            <li><strong>CI/CD</strong> — a way to automatically build, test, and ship software. We cover it in detail later; for now, picture a robot assembly line for code.</li>
+            <li><strong>Agent</strong> — software that can <em>take actions on its own</em> to reach a goal, not just answer a question.</li>
+          </ul>
+
+          <figure class="my-6 rounded-xl overflow-hidden bg-white shadow-sm ring-1 ring-slate-200">
+            <img src="assets/diagrams/01-learning-roadmap.svg" alt="Learning roadmap with 10 stepping stones from What is AI through LLMs, prompts, context, RAG, memory, MCP, agents, CI/CD, to MVP" class="w-full h-auto" loading="lazy" width="900" height="320" />
+            <figcaption class="px-4 py-2.5 text-xs text-slate-500 text-center bg-slate-50 border-t border-slate-100">Your path through 10 sections — from AI basics to agents that ship software</figcaption>
+          </figure>
+
+          <h3 class="text-lg font-semibold text-slate-900">So, what <em>is</em> Artificial Intelligence?</h3>
+          <p><strong>Artificial Intelligence (AI)</strong> is software that performs tasks we normally associate with human thinking — understanding language, recognizing patterns, making decisions, or generating new content. Think of it as a very well-read assistant: it has seen an enormous amount of examples and uses them to make smart guesses.</p>
+          <p><strong>Analogy:</strong> A traditional program is like a vending machine — press B4, get exactly the same snack every time. AI is more like an experienced chef — give it ingredients and a request, and it improvises a reasonable dish based on everything it has tasted before. The chef might not be perfect, but it adapts.</p>
+          <p>A few useful distinctions for beginners:</p>
+          <ul class="list-disc pl-6 space-y-1">
+            <li><strong>Narrow AI</strong> — good at one thing (spam filters, photo tagging, chatbots). This is all the AI that exists today.</li>
+            <li><strong>General AI</strong> — hypothetical human-level intelligence across any task. Does not exist yet.</li>
+            <li><strong>Generative AI</strong> — AI that <em>creates</em> new content (text, images, code). This is the family that powers the tools in this tutorial.</li>
+          </ul>
+          <p>Throughout this tutorial we focus on <strong>generative AI</strong> and how it grows up into <strong>agents</strong> that can help run a software delivery pipeline.</p>
+        </div>
+
+        <!-- QUIZ 1 (rendered by script.js) -->
+        <div data-quiz="1"></div>
+      </section>
+
+      <!-- ===================== SECTION 2 ===================== -->
+      <section id="llm" class="mb-16" data-section data-title="Large Language Models (LLMs)">
+        <div class="flex items-center gap-3">
+          <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 text-white text-sm font-bold">02</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Large Language Models (LLMs)</h2>
+        </div>
+        <div class="prose prose-slate max-w-none mt-5 text-slate-700 leading-relaxed space-y-4">
+          <p>A <strong>Large Language Model (LLM)</strong> is the "brain" behind modern AI assistants. It is a program trained on a massive amount of text — books, articles, websites, code — until it becomes extremely good at one deceptively simple task: <strong>predicting the next word</strong>.</p>
+          <p><strong>Analogy:</strong> Think of the autocomplete on your phone, but supercharged a million times. Your phone guesses the next word; an LLM can guess the next paragraph, the next function of code, or a full essay — and it stays on-topic because it has "read" so much.</p>
+          <h3 class="text-lg font-semibold text-slate-900">A few terms you'll hear</h3>
+          <ul class="list-disc pl-6 space-y-1">
+            <li><strong>Tokens</strong> — LLMs don't read whole words; they read chunks called tokens (roughly 3–4 characters). "Hamburger" might be 2–3 tokens. Pricing and limits are usually measured in tokens.</li>
+            <li><strong>Parameters</strong> — the internal "dials" the model learned during training. More parameters often means more capability (but also more cost).</li>
+            <li><strong>Training vs. inference</strong> — <em>training</em> is the one-time, expensive process of teaching the model. <em>Inference</em> is each time you actually use it to get an answer.</li>
+            <li><strong>Hallucination</strong> — when an LLM confidently states something that is wrong. Because it predicts plausible text, it can invent facts. Always verify important output.</li>
+          </ul>
+          <figure class="my-6 rounded-xl overflow-hidden bg-white shadow-sm ring-1 ring-slate-200">
+            <img src="assets/diagrams/02-llm-tokens.svg" alt="Diagram of input text split into tokens, fed into an LLM, with next-token probability bars" class="w-full h-auto" loading="lazy" width="900" height="340" />
+            <figcaption class="px-4 py-2.5 text-xs text-slate-500 text-center bg-slate-50 border-t border-slate-100">Text is tokenized, processed by the LLM, which predicts the next token one step at a time</figcaption>
+          </figure>
+          <p>Crucially, an LLM by itself only produces <strong>text</strong>. It can't click buttons, run tests, or deploy code. To do useful work in CI/CD, we wrap the LLM with extra abilities — context, memory, tools, and rules — which is exactly what the rest of this tutorial is about.</p>
+        </div>
+        <div data-quiz="2"></div>
+      </section>
+
+      <!-- ===================== SECTION 3 ===================== -->
+      <section id="prompt-engineering" class="mb-16" data-section data-title="Prompt Engineering">
+        <div class="flex items-center gap-3">
+          <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 text-white text-sm font-bold">03</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Prompt Engineering</h2>
+        </div>
+        <div class="prose prose-slate max-w-none mt-5 text-slate-700 leading-relaxed space-y-4">
+          <p>A <strong>prompt</strong> is simply the instruction you give an LLM. <strong>Prompt engineering</strong> is the craft of writing that instruction well so you get a useful, reliable answer. Because the model can't read your mind, the quality of your prompt hugely affects the quality of the result.</p>
+          <p><strong>Analogy:</strong> Imagine hiring a brilliant but very literal intern who just started today. They know a lot but know nothing about <em>your</em> situation. The clearer your instructions — goal, context, format — the better their work.</p>
+          <h3 class="text-lg font-semibold text-slate-900">What makes a "good prompt"?</h3>
+          <ul class="list-disc pl-6 space-y-1">
+            <li><strong>Role</strong> — tell the model who to act as ("You are an expert Python reviewer").</li>
+            <li><strong>Task</strong> — state the goal clearly and specifically.</li>
+            <li><strong>Context</strong> — provide the relevant background, code, or constraints.</li>
+            <li><strong>Format</strong> — say how you want the answer (bullet list, JSON, a table).</li>
+            <li><strong>Examples</strong> — showing one or two examples ("few-shot") often beats explaining.</li>
+          </ul>
+          <h3 class="text-lg font-semibold text-slate-900">System prompt vs. user prompt</h3>
+          <p>The <strong>system prompt</strong> is a special, behind-the-scenes instruction that sets the AI's overall behavior, personality, and rules for the whole conversation. The <strong>user prompt</strong> is your individual message. Think of the system prompt as a company's <em>employee handbook</em> ("always be polite, never share secrets, follow these steps") and the user prompt as a specific <em>customer request</em>. In CI/CD agents, the system prompt is where you encode safety rules like "never deploy to production without approval."</p>
+          <figure class="my-6 rounded-xl overflow-hidden bg-white shadow-sm ring-1 ring-slate-200">
+            <img src="assets/diagrams/03-prompt-comparison.svg" alt="Side-by-side comparison of a vague prompt producing generic output versus a structured prompt with Role, Task, Context, and Format producing actionable JSON" class="w-full h-auto" loading="lazy" width="900" height="380" />
+            <figcaption class="px-4 py-2.5 text-xs text-slate-500 text-center bg-slate-50 border-t border-slate-100">Structured prompts (role, task, context, format) yield specific, machine-usable answers</figcaption>
+          </figure>
+        </div>
+        <div data-quiz="3"></div>
+      </section>
+
+      <!-- ===================== SECTION 4 ===================== -->
+      <section id="context" class="mb-16" data-section data-title="Context &amp; Context Engineering">
+        <div class="flex items-center gap-3">
+          <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 text-white text-sm font-bold">04</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Context &amp; Context Engineering</h2>
+        </div>
+        <div class="prose prose-slate max-w-none mt-5 text-slate-700 leading-relaxed space-y-4">
+          <p><strong>Context</strong> is all the information the model can "see" while answering your current request — your prompt, the recent conversation, any documents or code you pasted in, and tool results. The model has no memory of anything outside this window.</p>
+          <p>The <strong>context window</strong> is the maximum amount of text (measured in tokens) the model can consider at once. Like a desk: only so many papers fit on it. Put the wrong papers there and the model gets confused; leave out the right ones and it can't help.</p>
+          <h3 class="text-lg font-semibold text-slate-900">Context engineering</h3>
+          <p><strong>Context engineering</strong> is the discipline of choosing <em>what</em> to put into that window, in what order, and in what form — so the model has exactly what it needs and nothing that distracts it. If prompt engineering is writing the question well, context engineering is curating the model's entire workspace.</p>
+          <ul class="list-disc pl-6 space-y-1">
+            <li><strong>Relevance:</strong> include the code file that's actually broken, not the whole repository.</li>
+            <li><strong>Recency &amp; order:</strong> the model pays special attention to the start and end of the context.</li>
+            <li><strong>Compression:</strong> summarize long histories so they still fit.</li>
+            <li><strong>Noise control:</strong> too much irrelevant text actively hurts answers.</li>
+          </ul>
+          <p>In CI/CD agents, good context engineering means automatically pulling in the failing test log, the relevant source file, and the project's coding standards — and leaving out everything else.</p>
+          <figure class="my-6 rounded-xl overflow-hidden bg-white shadow-sm ring-1 ring-slate-200">
+            <img src="assets/diagrams/04-context-window.svg" alt="Desk metaphor for context window: irrelevant documents filtered out, relevant logs and code files placed on the desk before reaching the LLM" class="w-full h-auto" loading="lazy" width="900" height="360" />
+            <figcaption class="px-4 py-2.5 text-xs text-slate-500 text-center bg-slate-50 border-t border-slate-100">Context engineering curates what fits on the model's limited "desk"</figcaption>
+          </figure>
+        </div>
+        <div data-quiz="4"></div>
+      </section>
+
+      <!-- ===================== SECTION 5 ===================== -->
+      <section id="rag" class="mb-16" data-section data-title="RAG (Retrieval-Augmented Generation)">
+        <div class="flex items-center gap-3">
+          <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 text-white text-sm font-bold">05</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">RAG — Retrieval-Augmented Generation</h2>
+        </div>
+        <div class="prose prose-slate max-w-none mt-5 text-slate-700 leading-relaxed space-y-4">
+          <p>An LLM only knows what it learned during training, which has a cutoff date, and it knows nothing about <em>your</em> private documents. <strong>RAG (Retrieval-Augmented Generation)</strong> fixes this by <strong>looking things up first</strong>, then letting the model answer using what it found.</p>
+          <p><strong>Analogy:</strong> An open-book exam. Instead of relying purely on memory, the student first finds the relevant page in the textbook, then writes the answer using that page. RAG lets the AI "open the book" — your wiki, your codebase, your runbooks — before answering.</p>
+          <h3 class="text-lg font-semibold text-slate-900">How RAG works (in plain terms)</h3>
+          <ol class="list-decimal pl-6 space-y-1">
+            <li>Your documents are chopped into chunks and turned into <strong>embeddings</strong> (numerical "meaning fingerprints") stored in a <strong>vector database</strong>.</li>
+            <li>When you ask a question, the system finds the chunks whose meaning is closest to your question — <strong>semantic search</strong>, not just keyword matching.</li>
+            <li>Those chunks are added to the context, and the LLM answers grounded in them.</li>
+          </ol>
+          <p><strong>Why it matters:</strong> RAG reduces hallucinations (the answer is grounded in real sources), keeps answers up to date without retraining, and lets the AI use private knowledge. In CI/CD, RAG can pull the right section of your deployment docs or past incident reports before the agent acts.</p>
+          <figure class="my-6 rounded-xl overflow-hidden bg-white shadow-sm ring-1 ring-slate-200">
+            <img src="assets/diagrams/05-rag-pipeline.svg" alt="RAG pipeline flow: question, vector search in document store, relevant chunks retrieved, LLM generates grounded answer with citations" class="w-full h-auto" loading="lazy" width="900" height="300" />
+            <figcaption class="px-4 py-2.5 text-xs text-slate-500 text-center bg-slate-50 border-t border-slate-100">RAG retrieves relevant documents first, then generates an answer grounded in real sources</figcaption>
+          </figure>
+        </div>
+        <div data-quiz="5"></div>
+      </section>
+
+      <!-- ===================== SECTION 6 ===================== -->
+      <section id="memory" class="mb-16" data-section data-title="State, Memory &amp; Structured Output">
+        <div class="flex items-center gap-3">
+          <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 text-white text-sm font-bold">06</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">State, Memory &amp; Structured Output</h2>
+        </div>
+        <div class="prose prose-slate max-w-none mt-5 text-slate-700 leading-relaxed space-y-4">
+          <p>By default, an LLM is <strong>stateless</strong> — it forgets everything the moment a request ends, like a person with no short- or long-term memory who reintroduces themselves every sentence. To build useful agents, we add <strong>state</strong> and <strong>memory</strong>.</p>
+          <ul class="list-disc pl-6 space-y-1">
+            <li><strong>State</strong> — the current situation of a task: what step we're on, what's been done, what's pending. In CI/CD, the state might be "tests passed, awaiting deploy approval."</li>
+            <li><strong>Short-term memory</strong> — the ongoing conversation, kept inside the context window.</li>
+            <li><strong>Long-term memory</strong> — facts saved outside the model (in a database or files) and recalled later, e.g. "this project always deploys on Fridays."</li>
+          </ul>
+          <h3 class="text-lg font-semibold text-slate-900">Structured output</h3>
+          <p>Normally an LLM replies in free-flowing prose, which is hard for other software to use. <strong>Structured output</strong> forces the model to answer in a strict, predictable format — most often <strong>JSON</strong> — so a program can read it reliably.</p>
+          <p><strong>Analogy:</strong> The difference between a friend casually telling you about an event ("yeah it's Friday-ish, downtown somewhere") versus a calendar invite with exact fields for date, time, and location. Machines need the calendar invite. For example, instead of a paragraph, an agent might return <code>{"action": "deploy", "environment": "staging", "approved": false}</code> — which the pipeline can act on automatically.</p>
+          <figure class="my-6 rounded-xl overflow-hidden bg-white shadow-sm ring-1 ring-slate-200">
+            <img src="assets/diagrams/06-structured-output.svg" alt="Comparison of vague free-text agent output that pipelines cannot parse versus structured JSON with action, environment, and approved fields" class="w-full h-auto" loading="lazy" width="900" height="340" />
+            <figcaption class="px-4 py-2.5 text-xs text-slate-500 text-center bg-slate-50 border-t border-slate-100">Structured JSON lets CI/CD pipelines automate decisions reliably</figcaption>
+          </figure>
+        </div>
+        <div data-quiz="6"></div>
+      </section>
+
+      <!-- ===================== SECTION 7 ===================== -->
+      <section id="mcp-hooks" class="mb-16" data-section data-title="MCP &amp; Hooks">
+        <div class="flex items-center gap-3">
+          <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 text-white text-sm font-bold">07</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">MCP &amp; Hooks</h2>
+        </div>
+        <div class="prose prose-slate max-w-none mt-5 text-slate-700 leading-relaxed space-y-4">
+          <h3 class="text-lg font-semibold text-slate-900">MCP — Model Context Protocol</h3>
+          <p>For an AI to do real work it needs <strong>tools</strong>: read a file, query a database, call GitHub, run a test. The <strong>Model Context Protocol (MCP)</strong> is an open standard that lets AI applications connect to these tools and data sources in a consistent way.</p>
+          <p><strong>Analogy:</strong> MCP is like a <strong>USB-C port for AI</strong>. Before USB, every device needed its own special cable. USB-C created one universal plug. Likewise, instead of writing custom glue for every tool, an "MCP server" exposes a tool in a standard shape, and any MCP-compatible AI can use it. Build the connector once, reuse it everywhere.</p>
+          <h3 class="text-lg font-semibold text-slate-900">Hooks</h3>
+          <p><strong>Hooks</strong> are scripts that run automatically at specific moments — "when X happens, do Y." They let you insert your own logic into a process without changing its core.</p>
+          <p><strong>Analogy:</strong> A motion-sensor light. You don't rewire the house; you just say "when motion is detected, turn on the light." In CI/CD and agent workflows, hooks fire on events like <em>before a commit</em>, <em>after tests run</em>, or <em>before an agent edits a file</em>. They are perfect for enforcing rules: a hook can block an agent's change if it would delete a critical file, or auto-run a code formatter after every edit.</p>
+          <figure class="my-6 rounded-xl overflow-hidden bg-white shadow-sm ring-1 ring-slate-200">
+            <img src="assets/diagrams/07-mcp-hooks.svg" alt="MCP hub connecting AI agent to GitHub, database, and file system; hooks firing on pre-commit, post-test, and agent file-edit events" class="w-full h-auto" loading="lazy" width="900" height="380" />
+            <figcaption class="px-4 py-2.5 text-xs text-slate-500 text-center bg-slate-50 border-t border-slate-100">MCP standardizes tool connections; hooks inject logic at pipeline events</figcaption>
+          </figure>
+        </div>
+        <div data-quiz="7"></div>
+      </section>
+
+      <!-- ===================== SECTION 8 ===================== -->
+      <section id="agentic" class="mb-16" data-section data-title="Agentic AI Fundamentals">
+        <div class="flex items-center gap-3">
+          <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 text-white text-sm font-bold">08</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Agentic AI Fundamentals</h2>
+        </div>
+        <div class="prose prose-slate max-w-none mt-5 text-slate-700 leading-relaxed space-y-4">
+          <p>Now we combine everything. <strong>Agentic AI</strong> is an LLM given a goal, plus the ability to <strong>plan, use tools, observe results, and try again</strong> — looping until the goal is met. A chatbot answers; an agent <em>acts</em>.</p>
+          <p><strong>Analogy:</strong> A chatbot is a knowledgeable consultant who gives advice and stops. An agent is a contractor you hire to actually renovate the kitchen — they make a plan, buy materials, do the work, check it, and fix mistakes, coming back to you only for big decisions.</p>
+          <h3 class="text-lg font-semibold text-slate-900">The agent loop</h3>
+          <ol class="list-decimal pl-6 space-y-1">
+            <li><strong>Perceive</strong> — read the goal and current context/state.</li>
+            <li><strong>Reason / Plan</strong> — decide the next step.</li>
+            <li><strong>Act</strong> — use a tool (run a test, edit a file, call an API via MCP).</li>
+            <li><strong>Observe</strong> — look at the result of that action.</li>
+            <li><strong>Repeat</strong> — loop until done, adjusting along the way.</li>
+          </ol>
+          <p>This loop is why agents need everything we've covered: <strong>context</strong> and <strong>memory</strong> to know the situation, <strong>tools/MCP</strong> to act, <strong>structured output</strong> to make decisions software can execute, and <strong>hooks</strong> plus a strong <strong>system prompt</strong> to stay safe. Important beginner caution: because agents take real actions, they need <strong>guardrails</strong> and <strong>human-in-the-loop</strong> approval for risky steps.</p>
+          <figure class="my-6 rounded-xl overflow-hidden bg-white shadow-sm ring-1 ring-slate-200">
+            <img src="assets/diagrams/08-agent-loop.svg" alt="Circular agent loop: Perceive, Reason, Act via tools, Observe, repeat, with human approval gate for risky production actions" class="w-full h-auto" loading="lazy" width="900" height="400" />
+            <figcaption class="px-4 py-2.5 text-xs text-slate-500 text-center bg-slate-50 border-t border-slate-100">Agents loop until the goal is met — with human approval for high-risk steps</figcaption>
+          </figure>
+        </div>
+        <div data-quiz="8"></div>
+      </section>
+
+      <!-- ===================== SECTION 9 ===================== -->
+      <section id="cicd" class="mb-16" data-section data-title="Agentic AI in CI/CD">
+        <div class="flex items-center gap-3">
+          <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 text-white text-sm font-bold">09</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Agentic AI in CI/CD</h2>
+        </div>
+        <div class="prose prose-slate max-w-none mt-5 text-slate-700 leading-relaxed space-y-4">
+          <h3 class="text-lg font-semibold text-slate-900">First, what is CI/CD?</h3>
+          <ul class="list-disc pl-6 space-y-1">
+            <li><strong>CI — Continuous Integration:</strong> every time a developer saves new code, it is automatically merged, built, and tested. Catching problems early, like a spell-checker that runs as you type.</li>
+            <li><strong>CD — Continuous Delivery/Deployment:</strong> code that passes is automatically prepared for release (delivery) or pushed live (deployment).</li>
+          </ul>
+          <p>A <strong>pipeline</strong> is the automated sequence of stages — build → test → deploy — that code travels through. Traditional pipelines follow fixed scripts: powerful, but rigid. They can't reason about <em>why</em> a test failed.</p>
+          <h3 class="text-lg font-semibold text-slate-900">Where agents add value</h3>
+          <p>An agentic AI plugged into the pipeline can <strong>understand</strong> events and respond intelligently rather than just running fixed steps:</p>
+          <ul class="list-disc pl-6 space-y-1">
+            <li><strong>Auto-fix failing builds:</strong> read the error log, locate the bug, propose a fix, and open a pull request.</li>
+            <li><strong>Intelligent code review:</strong> comment on a PR with real reasoning about risks and style.</li>
+            <li><strong>Triage &amp; root-cause:</strong> when a deploy fails, gather logs (often via RAG over past incidents) and explain the likely cause.</li>
+            <li><strong>Smart rollbacks:</strong> detect a bad release and recommend or trigger a rollback — ideally behind a human-approval gate.</li>
+            <li><strong>Release notes &amp; docs:</strong> summarize what changed in plain language.</li>
+          </ul>
+          <p>Safety is non-negotiable here. Use <strong>hooks</strong> to enforce rules, a strict <strong>system prompt</strong> for guardrails, <strong>structured output</strong> so the pipeline can act on decisions, and <strong>human-in-the-loop approval</strong> before anything touches production.</p>
+          <figure class="my-6 rounded-xl overflow-hidden bg-white shadow-sm ring-1 ring-slate-200">
+            <img src="assets/diagrams/09-cicd-agent.svg" alt="CI/CD pipeline from commit through build, test, approval gate, and deploy, with AI agent reading failed test logs and opening a fix pull request" class="w-full h-auto" loading="lazy" width="900" height="360" />
+            <figcaption class="px-4 py-2.5 text-xs text-slate-500 text-center bg-slate-50 border-t border-slate-100">Agents sit alongside the pipeline — fixing failures intelligently, humans approve production</figcaption>
+          </figure>
+        </div>
+        <div data-quiz="9"></div>
+      </section>
+
+      <!-- ===================== SECTION 10 ===================== -->
+      <section id="mvp-tools" class="mb-16" data-section data-title="MVP Specification &amp; Popular Tools">
+        <div class="flex items-center gap-3">
+          <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 text-white text-sm font-bold">10</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">MVP Specification &amp; Popular AI Tools</h2>
+        </div>
+        <div class="prose prose-slate max-w-none mt-5 text-slate-700 leading-relaxed space-y-4">
+          <h3 class="text-lg font-semibold text-slate-900">What is an MVP?</h3>
+          <p>An <strong>MVP (Minimum Viable Product)</strong> is the simplest version of a product that still delivers real value and lets you learn from real users. The goal is to test your core idea quickly without building everything.</p>
+          <p><strong>Analogy:</strong> If the goal is "help people get from A to B," the MVP is a skateboard, not a half-built car. The skateboard is usable today and teaches you what users actually want, while the half-car helps no one.</p>
+          <h3 class="text-lg font-semibold text-slate-900">Writing an MVP specification</h3>
+          <p>An <strong>MVP specification</strong> (or "spec") is a short document describing what you're building and why. A clear spec is also the perfect input for an AI agent — it gives the agent unambiguous context and a definition of "done." A beginner-friendly spec includes:</p>
+          <ul class="list-disc pl-6 space-y-1">
+            <li><strong>Problem &amp; goal:</strong> what pain are we solving, for whom?</li>
+            <li><strong>Core features only:</strong> the must-haves; defer the nice-to-haves.</li>
+            <li><strong>User stories:</strong> "As a [user], I want [action] so that [benefit]."</li>
+            <li><strong>Acceptance criteria:</strong> how we know a feature is done and correct.</li>
+            <li><strong>Out of scope:</strong> explicitly list what you are <em>not</em> building — this keeps both humans and agents focused.</li>
+          </ul>
+          <h3 class="text-lg font-semibold text-slate-900">Popular AI tools (a beginner's map)</h3>
+          <ul class="list-disc pl-6 space-y-1">
+            <li><strong>Chat assistants / model providers:</strong> ChatGPT (OpenAI), Claude (Anthropic), Gemini (Google) — general reasoning and writing.</li>
+            <li><strong>AI coding tools / IDEs:</strong> Cursor, GitHub Copilot, Windsurf — write and edit code inside your editor; many now include agent modes.</li>
+            <li><strong>Agent &amp; orchestration frameworks:</strong> LangChain, LlamaIndex, CrewAI, Microsoft AutoGen — for building custom multi-step agents.</li>
+            <li><strong>CI/CD platforms (where agents plug in):</strong> GitHub Actions, GitLab CI/CD, Jenkins, CircleCI.</li>
+            <li><strong>RAG / vector databases:</strong> Pinecone, Weaviate, Chroma, pgvector — store and search embeddings.</li>
+          </ul>
+          <p>The landscape changes fast, so focus on the <em>concepts</em> (which are stable) rather than memorizing brand names. Tools come and go; context, prompts, tools, memory, and the agent loop remain.</p>
+          <figure class="my-6 rounded-xl overflow-hidden bg-white shadow-sm ring-1 ring-slate-200">
+            <img src="assets/diagrams/10-mvp-tools.svg" alt="MVP evolution from skateboard to car alongside categories of popular AI tools: chat models, coding IDEs, agent frameworks, CI/CD, and vector databases" class="w-full h-auto" loading="lazy" width="900" height="380" />
+            <figcaption class="px-4 py-2.5 text-xs text-slate-500 text-center bg-slate-50 border-t border-slate-100">Ship a skateboard first; learn the stable concepts behind the fast-changing tool landscape</figcaption>
+          </figure>
+        </div>
+        <div data-quiz="10"></div>
+      </section>
+
+      <!-- SECTIONS -->
+
+      <!-- FOOTER -->
+      <footer class="mt-16 border-t border-slate-200 pt-8 pb-12 text-sm text-slate-500">
+        <p class="font-semibold text-slate-700">Agentic AI in CI/CD — Beginner Tutorial</p>
+        <p class="mt-1">Built as a single-page, self-contained learning resource. Styling by Tailwind CSS. Free to adapt and share.</p>
+        <p class="mt-3 text-xs text-slate-400">Diagrams live in <code class="rounded bg-slate-100 px-1 py-0.5">assets/diagrams/</code> as editable SVG files.</p>
+      </footer>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

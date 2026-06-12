@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" role="img" aria-labelledby="title desc">
+  <title id="title">Agent loop with human approval gate</title>
+  <desc id="desc">Perceive, Reason, Act, Observe cycle with approval for risky actions</desc>
+  <rect width="900" height="400" fill="#f8fafc" rx="12"/>
+  <text x="450" y="36" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" font-weight="700" fill="#0f172a">The agent loop</text>
+  <text x="450" y="58" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#64748b">Perceive ’ Reason ’ Act ’ Observe ’ repeat</text>
+  <!-- Center LLM -->
+  <circle cx="450" cy="210" r="55" fill="#4f46e5"/>
+  <text x="450" y="205" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#fff">Agent</text>
+  <text x="450" y="222" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#c7d2fe">LLM + tools</text>
+  <!-- Loop nodes -->
+  <g font-family="system-ui,sans-serif">
+    <rect x="370" y="80" width="160" height="50" rx="25" fill="#eef2ff" stroke="#6366f1" stroke-width="2"/>
+    <text x="450" y="110" text-anchor="middle" font-size="12" font-weight="600" fill="#4338ca">1. Perceive</text>
+    <rect x="620" y="185" width="160" height="50" rx="25" fill="#eef2ff" stroke="#6366f1" stroke-width="2"/>
+    <text x="700" y="215" text-anchor="middle" font-size="12" font-weight="600" fill="#4338ca">2. Reason</text>
+    <rect x="370" y="290" width="160" height="50" rx="25" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+    <text x="450" y="320" text-anchor="middle" font-size="12" font-weight="600" fill="#047857">3. Act (tools)</text>
+    <rect x="120" y="185" width="160" height="50" rx="25" fill="#eef2ff" stroke="#6366f1" stroke-width="2"/>
+    <text x="200" y="215" text-anchor="middle" font-size="12" font-weight="600" fill="#4338ca">4. Observe</text>
+  </g>
+  <!-- Arrows clockwise -->
+  <path d="M 450 130 Q 580 150 700 185" fill="none" stroke="#6366f1" stroke-width="2" marker-end="url(#al)"/>
+  <path d="M 700 235 Q 580 280 450 290" fill="none" stroke="#10b981" stroke-width="2" marker-end="url(#al)"/>
+  <path d="M 370 315 Q 250 280 200 235" fill="none" stroke="#6366f1" stroke-width="2" marker-end="url(#al)"/>
+  <path d="M 200 185 Q 250 140 370 105" fill="none" stroke="#6366f1" stroke-width="2" marker-end="url(#al)"/>
+  <defs><marker id="al" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#6366f1"/></marker></defs>
+  <!-- Human gate -->
+  <rect x="580" y="300" width="200" height="70" rx="10" fill="#fff" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6"/>
+  <text x="680" y="328" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#b45309">Human approval</text>
+  <text x="680" y="348" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#92400e">Required for production</text>
+  <text x="680" y="362" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#92400e">deploy &amp; risky actions</text>
+  <path d="M 530 315 L 575 330" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4"/>
+  <text x="450" y="385" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#64748b">Chatbot answers once · Agent loops until the goal is met</text>
+</svg>
