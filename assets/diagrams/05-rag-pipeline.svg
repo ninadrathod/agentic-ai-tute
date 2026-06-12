@@ -1,51 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" role="img" aria-labelledby="title desc">
-  <title id="title">RAG pipeline</title>
-  <desc id="desc">Question to vector search, chunks to LLM, grounded answer with citations</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" role="img" aria-label="RAG pipeline from question to grounded answer">
   <defs>
-    <marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#6366f1"/></marker>
+    <marker id="d05ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#6366f1"/></marker>
   </defs>
   <rect width="900" height="300" fill="#f8fafc" rx="12"/>
-  <text x="450" y="36" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" font-weight="700" fill="#0f172a">RAG pipeline  retrieval-augmented generation</text>
-  <!-- Step boxes -->
+  <text x="450" y="36" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" font-weight="700" fill="#0f172a">RAG pipeline - retrieval-augmented generation</text>
   <g font-family="system-ui,sans-serif">
     <rect x="30" y="100" width="110" height="70" rx="10" fill="#fff" stroke="#6366f1" stroke-width="2"/>
     <text x="85" y="130" text-anchor="middle" font-size="11" font-weight="600" fill="#4338ca">Question</text>
-    <text x="85" y="150" text-anchor="middle" font-size="9" fill="#64748b">"How do we</text>
-    <text x="85" y="162" text-anchor="middle" font-size="9" fill="#64748b">rollback?"</text>
-
-    <path d="M 145 135 L 175 135" stroke="#6366f1" stroke-width="2" marker-end="url(#ar)"/>
-
+    <text x="85" y="150" text-anchor="middle" font-size="9" fill="#64748b">How do we</text>
+    <text x="85" y="162" text-anchor="middle" font-size="9" fill="#64748b">rollback?</text>
+    <path d="M 145 135 L 175 135" stroke="#6366f1" stroke-width="2" marker-end="url(#d05ar)"/>
     <rect x="180" y="85" width="130" height="100" rx="10" fill="#eef2ff" stroke="#818cf8"/>
     <text x="245" y="115" text-anchor="middle" font-size="11" font-weight="600" fill="#4338ca">Vector search</text>
     <text x="245" y="135" text-anchor="middle" font-size="9" fill="#64748b">Semantic similarity</text>
     <text x="245" y="155" text-anchor="middle" font-size="9" fill="#64748b">in document store</text>
-    <circle cx="215" cy="168" r="4" fill="#10b981"/><circle cx="245" cy="168" r="4" fill="#10b981"/><circle cx="275" cy="168" r="4" fill="#6366f1"/>
-
-    <path d="M 315 135 L 345 135" stroke="#6366f1" stroke-width="2" marker-end="url(#ar)"/>
-
+    <path d="M 315 135 L 345 135" stroke="#6366f1" stroke-width="2" marker-end="url(#d05ar)"/>
     <rect x="350" y="85" width="130" height="100" rx="10" fill="#ecfdf5" stroke="#6ee7b7"/>
     <text x="415" y="115" text-anchor="middle" font-size="11" font-weight="600" fill="#047857">Relevant chunks</text>
-    <rect x="365" y="125" width="100" height="22" rx="4" fill="#fff" stroke="#a7f3d0"/><text x="415" y="140" text-anchor="middle" font-size="8" fill="#065f46">Runbook §4.2</text>
-    <rect x="365" y="152" width="100" height="22" rx="4" fill="#fff" stroke="#a7f3d0"/><text x="415" y="167" text-anchor="middle" font-size="8" fill="#065f46">Incident #891</text>
-
-    <path d="M 485 135 L 515 135" stroke="#6366f1" stroke-width="2" marker-end="url(#ar)"/>
-
+    <rect x="365" y="125" width="100" height="22" rx="4" fill="#fff" stroke="#a7f3d0"/><text x="415" y="140" text-anchor="middle" font-size="8" fill="#065f46">Runbook 4.2</text>
+    <rect x="365" y="152" width="100" height="22" rx="4" fill="#fff" stroke="#a7f3d0"/><text x="415" y="167" text-anchor="middle" font-size="8" fill="#065f46">Incident 891</text>
+    <path d="M 485 135 L 515 135" stroke="#6366f1" stroke-width="2" marker-end="url(#d05ar)"/>
     <rect x="520" y="100" width="90" height="70" rx="10" fill="#4f46e5"/>
     <text x="565" y="135" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">LLM</text>
     <text x="565" y="155" text-anchor="middle" font-size="9" fill="#c7d2fe">+ context</text>
-
-    <path d="M 615 135 L 645 135" stroke="#10b981" stroke-width="2" marker-end="url(#ar)"/>
-
+    <path d="M 615 135 L 645 135" stroke="#10b981" stroke-width="2" marker-end="url(#d05ar)"/>
     <rect x="650" y="85" width="200" height="100" rx="10" fill="#fff" stroke="#10b981" stroke-width="2"/>
     <text x="750" y="115" text-anchor="middle" font-size="11" font-weight="600" fill="#047857">Grounded answer</text>
     <text x="665" y="138" font-size="9" fill="#334155">Run kubectl rollout undo...</text>
-    <text x="665" y="155" font-size="9" fill="#334155">[1] Runbook §4.2  [2] #891</text>
-    <text x="665" y="175" font-size="9" fill="#059669" font-weight="600">Fewer hallucinations · up-to-date</text>
+    <text x="665" y="155" font-size="9" fill="#334155">[1] Runbook  [2] Incident 891</text>
+    <text x="665" y="175" font-size="9" fill="#059669" font-weight="600">Fewer hallucinations</text>
   </g>
-  <!-- Document store below -->
   <rect x="180" y="210" width="300" height="60" rx="8" fill="#f1f5f9" stroke="#cbd5e1"/>
   <text x="330" y="235" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">Vector database (embeddings)</text>
-  <text x="330" y="255" text-anchor="middle" font-size="9" fill="#64748b">Wiki · runbooks · codebase chunks · incident reports</text>
-  <path d="M 245 185 L 245 205" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4"/>
-  <path d="M 330 185 L 330 205" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4"/>
+  <text x="330" y="255" text-anchor="middle" font-size="9" fill="#64748b">Wiki, runbooks, codebase chunks, incident reports</text>
 </svg>

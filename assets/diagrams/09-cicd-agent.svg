@@ -1,40 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" role="img" aria-labelledby="title desc">
-  <title id="title">CI/CD pipeline with AI agent</title>
-  <desc id="desc">Commit build test deploy with agent fixing failures and approval gate</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" role="img" aria-label="CI/CD pipeline with AI agent fixing test failures">
   <defs>
-    <marker id="cd" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#6366f1"/></marker>
+    <marker id="d09cd" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#6366f1"/></marker>
   </defs>
   <rect width="900" height="360" fill="#f8fafc" rx="12"/>
   <text x="450" y="36" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" font-weight="700" fill="#0f172a">Agentic AI alongside the CI/CD pipeline</text>
-  <!-- Pipeline -->
   <g font-family="system-ui,sans-serif" font-size="11">
     <rect x="40" y="100" width="90" height="50" rx="8" fill="#fff" stroke="#6366f1"/><text x="85" y="130" text-anchor="middle" font-weight="600" fill="#4338ca">Commit</text>
-    <path d="M 135 125 L 165 125" stroke="#6366f1" stroke-width="2" marker-end="url(#cd)"/>
+    <path d="M 135 125 L 165 125" stroke="#6366f1" stroke-width="2" marker-end="url(#d09cd)"/>
     <rect x="170" y="100" width="90" height="50" rx="8" fill="#fff" stroke="#6366f1"/><text x="215" y="130" text-anchor="middle" font-weight="600" fill="#4338ca">Build</text>
-    <path d="M 265 125 L 295 125" stroke="#6366f1" stroke-width="2" marker-end="url(#cd)"/>
+    <path d="M 265 125 L 295 125" stroke="#6366f1" stroke-width="2" marker-end="url(#d09cd)"/>
     <rect x="300" y="100" width="90" height="50" rx="8" fill="#fff" stroke="#6366f1"/><text x="345" y="130" text-anchor="middle" font-weight="600" fill="#4338ca">Test</text>
-    <path d="M 395 125 L 425 125" stroke="#6366f1" stroke-width="2" marker-end="url(#cd)"/>
+    <path d="M 395 125 L 425 125" stroke="#6366f1" stroke-width="2" marker-end="url(#d09cd)"/>
     <rect x="430" y="100" width="100" height="50" rx="8" fill="#fef3c7" stroke="#f59e0b"/><text x="480" y="125" text-anchor="middle" font-weight="600" fill="#b45309">Approval</text><text x="480" y="140" text-anchor="middle" font-size="9" fill="#92400e">gate</text>
-    <path d="M 535 125 L 565 125" stroke="#10b981" stroke-width="2" marker-end="url(#cd)"/>
+    <path d="M 535 125 L 565 125" stroke="#10b981" stroke-width="2" marker-end="url(#d09cd)"/>
     <rect x="570" y="100" width="90" height="50" rx="8" fill="#d1fae5" stroke="#10b981"/><text x="615" y="130" text-anchor="middle" font-weight="600" fill="#047857">Deploy</text>
   </g>
-  <!-- Test failure -->
   <rect x="300" y="165" width="90" height="28" rx="6" fill="#fee2e2" stroke="#f87171"/>
-  <text x="345" y="184" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="600" fill="#dc2626">Test fails </text>
-  <!-- Agent box -->
+  <text x="345" y="184" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="600" fill="#dc2626">Test fails</text>
   <rect x="620" y="180" width="240" height="140" rx="12" fill="#4f46e5"/>
   <text x="740" y="210" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" font-weight="700" fill="#fff">AI Agent</text>
   <text x="640" y="235" font-family="system-ui,sans-serif" font-size="10" fill="#e0e7ff">1. Read error log</text>
   <text x="640" y="255" font-family="system-ui,sans-serif" font-size="10" fill="#e0e7ff">2. Locate bug in code</text>
-  <text x="640" y="275" font-family="system-ui,sans-serif" font-size="10" fill="#e0e7ff">3. Propose fix ’ open PR</text>
+  <text x="640" y="275" font-family="system-ui,sans-serif" font-size="10" fill="#e0e7ff">3. Propose fix, open PR</text>
   <text x="640" y="300" font-family="system-ui,sans-serif" font-size="9" fill="#c7d2fe">Uses RAG, MCP, structured output</text>
-  <!-- Dashed connections -->
-  <path d="M 345 165 L 345 155" stroke="#f87171" stroke-width="1.5"/>
-  <path d="M 390 178 L 615 220" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5" marker-end="url(#cd)"/>
+  <path d="M 390 178 L 615 220" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5" marker-end="url(#d09cd)"/>
   <text x="500" y="200" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#64748b">agent reads logs</text>
   <path d="M 740 180 L 740 155 L 200 155 L 200 100" stroke="#10b981" stroke-width="1.5" stroke-dasharray="5"/>
-  <text x="470" y="148" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#059669">fix PR ’ new commit ’ pipeline re-runs</text>
-  <!-- Legend -->
+  <text x="470" y="148" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#059669">fix PR - new commit - pipeline re-runs</text>
   <rect x="40" y="280" width="520" height="60" rx="8" fill="#fff" stroke="#e2e8f0"/>
   <text x="60" y="305" font-family="system-ui,sans-serif" font-size="10" fill="#334155">Traditional pipeline: fixed scripts</text>
   <text x="60" y="325" font-family="system-ui,sans-serif" font-size="10" fill="#334155">+ Agent: understands failures, acts intelligently, human approves production</text>

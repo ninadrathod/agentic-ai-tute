@@ -8,7 +8,8 @@ A single-page, self-contained HTML tutorial covering Agentic AI concepts in a CI
 |------|---------|
 | `index.html` | Tutorial content, layout, and Tailwind styling |
 | `script.js` | Navigation, mobile menu, quiz rendering, and progress tracking |
-| `assets/diagrams/*.svg` | Ten section diagrams (scalable SVG, indigo/emerald theme) |
+| `assets/diagrams/*.png` | Ten section diagrams (rendered PNG images, visible everywhere) |
+| `assets/diagrams/*.svg` | Editable SVG sources used to generate the PNGs |
 | `CNAME` | Custom domain for GitHub Pages (optional) |
 | `README.md` | This deployment guide |
 
@@ -91,7 +92,19 @@ Alternatives if you cannot use GitHub Pages:
 
 ## Editing diagrams
 
-Section visuals are SVG files in `assets/diagrams/`. Open any file in a text editor or design tool (Figma, Inkscape) to customize colors, labels, or layout. File names map to sections `01`–`10`.
+The tutorial displays **PNG images** (universally visible in browsers and on GitHub Pages). Source SVGs live alongside them in `assets/diagrams/`.
+
+To edit a diagram:
+
+1. Modify the matching `*.svg` file (e.g. `01-learning-roadmap.svg`).
+2. Regenerate PNGs:
+
+```bash
+npm install
+npm run build:diagrams
+```
+
+3. Commit both the updated SVG and PNG files.
 
 ## License
 

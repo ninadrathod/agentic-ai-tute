@@ -1,19 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 340" role="img" aria-labelledby="title desc">
-  <title id="title">Free text vs structured JSON output</title>
-  <desc id="desc">Messy prose vs JSON a CI/CD pipeline can parse</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 340" role="img" aria-label="Free text versus structured JSON output">
   <rect width="900" height="340" fill="#f8fafc" rx="12"/>
   <text x="450" y="36" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" font-weight="700" fill="#0f172a">Free text vs. structured output</text>
-  <!-- Free text -->
   <rect x="30" y="60" width="400" height="250" rx="10" fill="#fff" stroke="#fecaca"/>
   <text x="230" y="88" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#dc2626">Free-flowing prose</text>
   <rect x="50" y="100" width="360" height="120" rx="8" fill="#fef2f2" stroke="#fca5a5"/>
-  <text x="70" y="125" font-family="system-ui,sans-serif" font-size="11" fill="#7f1d1d">"Yeah I think we should probably deploy</text>
+  <text x="70" y="125" font-family="system-ui,sans-serif" font-size="11" fill="#7f1d1d">Yeah I think we should probably deploy</text>
   <text x="70" y="142" font-family="system-ui,sans-serif" font-size="11" fill="#7f1d1d">to staging soon, but maybe wait until</text>
-  <text x="70" y="159" font-family="system-ui,sans-serif" font-size="11" fill="#7f1d1d">Friday-ish unless someone approves..."</text>
+  <text x="70" y="159" font-family="system-ui,sans-serif" font-size="11" fill="#7f1d1d">Friday unless someone approves...</text>
   <text x="230" y="250" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#64748b">CI/CD pipeline</text>
   <rect x="120" y="260" width="220" height="36" rx="8" fill="#fee2e2" stroke="#f87171"/>
-  <text x="230" y="283" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#dc2626">Cannot parse ’ automation fails</text>
-  <!-- JSON -->
+  <text x="230" y="283" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#dc2626">Cannot parse - automation fails</text>
   <rect x="470" y="60" width="400" height="250" rx="10" fill="#fff" stroke="#6ee7b7"/>
   <text x="670" y="88" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#047857">Structured JSON</text>
   <rect x="490" y="100" width="360" height="120" rx="8" fill="#ecfdf5" stroke="#6ee7b7"/>
@@ -24,6 +20,6 @@
   <text x="510" y="205" font-family="ui-monospace,monospace" font-size="11" fill="#065f46">}</text>
   <text x="670" y="250" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#64748b">CI/CD pipeline</text>
   <rect x="520" y="260" width="300" height="36" rx="8" fill="#d1fae5" stroke="#34d399"/>
-  <text x="670" y="283" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#047857">Parses fields ’ runs deploy step</text>
-  <text x="450" y="325" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#64748b">Machines need the "calendar invite"  precise fields, not casual description</text>
+  <text x="670" y="283" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#047857">Parses fields - runs deploy step</text>
+  <text x="450" y="325" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#64748b">Machines need precise fields, not casual description</text>
 </svg>

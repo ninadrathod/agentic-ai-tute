@@ -139,7 +139,7 @@
           </ul>
 
           <figure class="my-6 rounded-xl overflow-hidden bg-white shadow-sm ring-1 ring-slate-200">
-            <img src="assets/diagrams/01-learning-roadmap.svg" alt="Learning roadmap with 10 stepping stones from What is AI through LLMs, prompts, context, RAG, memory, MCP, agents, CI/CD, to MVP" class="w-full h-auto" loading="lazy" width="900" height="320" />
+            <img src="assets/diagrams/01-learning-roadmap.png" alt="Learning roadmap with 10 stepping stones from What is AI through LLMs, prompts, context, RAG, memory, MCP, agents, CI/CD, to MVP" class="w-full h-auto" loading="lazy" width="900" height="320" />
             <figcaption class="px-4 py-2.5 text-xs text-slate-500 text-center bg-slate-50 border-t border-slate-100">Your path through 10 sections — from AI basics to agents that ship software</figcaption>
           </figure>
 
@@ -176,7 +176,7 @@
             <li><strong>Hallucination</strong> — when an LLM confidently states something that is wrong. Because it predicts plausible text, it can invent facts. Always verify important output.</li>
           </ul>
           <figure class="my-6 rounded-xl overflow-hidden bg-white shadow-sm ring-1 ring-slate-200">
-            <img src="assets/diagrams/02-llm-tokens.svg" alt="Diagram of input text split into tokens, fed into an LLM, with next-token probability bars" class="w-full h-auto" loading="lazy" width="900" height="340" />
+            <img src="assets/diagrams/02-llm-tokens.png" alt="Diagram of input text split into tokens, fed into an LLM, with next-token probability bars" class="w-full h-auto" loading="lazy" width="900" height="340" />
             <figcaption class="px-4 py-2.5 text-xs text-slate-500 text-center bg-slate-50 border-t border-slate-100">Text is tokenized, processed by the LLM, which predicts the next token one step at a time</figcaption>
           </figure>
           <p>Crucially, an LLM by itself only produces <strong>text</strong>. It can't click buttons, run tests, or deploy code. To do useful work in CI/CD, we wrap the LLM with extra abilities — context, memory, tools, and rules — which is exactly what the rest of this tutorial is about.</p>
@@ -204,7 +204,7 @@
           <h3 class="text-lg font-semibold text-slate-900">System prompt vs. user prompt</h3>
           <p>The <strong>system prompt</strong> is a special, behind-the-scenes instruction that sets the AI's overall behavior, personality, and rules for the whole conversation. The <strong>user prompt</strong> is your individual message. Think of the system prompt as a company's <em>employee handbook</em> ("always be polite, never share secrets, follow these steps") and the user prompt as a specific <em>customer request</em>. In CI/CD agents, the system prompt is where you encode safety rules like "never deploy to production without approval."</p>
           <figure class="my-6 rounded-xl overflow-hidden bg-white shadow-sm ring-1 ring-slate-200">
-            <img src="assets/diagrams/03-prompt-comparison.svg" alt="Side-by-side comparison of a vague prompt producing generic output versus a structured prompt with Role, Task, Context, and Format producing actionable JSON" class="w-full h-auto" loading="lazy" width="900" height="380" />
+            <img src="assets/diagrams/03-prompt-comparison.png" alt="Side-by-side comparison of a vague prompt producing generic output versus a structured prompt with Role, Task, Context, and Format producing actionable JSON" class="w-full h-auto" loading="lazy" width="900" height="380" />
             <figcaption class="px-4 py-2.5 text-xs text-slate-500 text-center bg-slate-50 border-t border-slate-100">Structured prompts (role, task, context, format) yield specific, machine-usable answers</figcaption>
           </figure>
         </div>
@@ -230,7 +230,7 @@
           </ul>
           <p>In CI/CD agents, good context engineering means automatically pulling in the failing test log, the relevant source file, and the project's coding standards — and leaving out everything else.</p>
           <figure class="my-6 rounded-xl overflow-hidden bg-white shadow-sm ring-1 ring-slate-200">
-            <img src="assets/diagrams/04-context-window.svg" alt="Desk metaphor for context window: irrelevant documents filtered out, relevant logs and code files placed on the desk before reaching the LLM" class="w-full h-auto" loading="lazy" width="900" height="360" />
+            <img src="assets/diagrams/04-context-window.png" alt="Desk metaphor for context window: irrelevant documents filtered out, relevant logs and code files placed on the desk before reaching the LLM" class="w-full h-auto" loading="lazy" width="900" height="360" />
             <figcaption class="px-4 py-2.5 text-xs text-slate-500 text-center bg-slate-50 border-t border-slate-100">Context engineering curates what fits on the model's limited "desk"</figcaption>
           </figure>
         </div>
@@ -254,7 +254,7 @@
           </ol>
           <p><strong>Why it matters:</strong> RAG reduces hallucinations (the answer is grounded in real sources), keeps answers up to date without retraining, and lets the AI use private knowledge. In CI/CD, RAG can pull the right section of your deployment docs or past incident reports before the agent acts.</p>
           <figure class="my-6 rounded-xl overflow-hidden bg-white shadow-sm ring-1 ring-slate-200">
-            <img src="assets/diagrams/05-rag-pipeline.svg" alt="RAG pipeline flow: question, vector search in document store, relevant chunks retrieved, LLM generates grounded answer with citations" class="w-full h-auto" loading="lazy" width="900" height="300" />
+            <img src="assets/diagrams/05-rag-pipeline.png" alt="RAG pipeline flow: question, vector search in document store, relevant chunks retrieved, LLM generates grounded answer with citations" class="w-full h-auto" loading="lazy" width="900" height="300" />
             <figcaption class="px-4 py-2.5 text-xs text-slate-500 text-center bg-slate-50 border-t border-slate-100">RAG retrieves relevant documents first, then generates an answer grounded in real sources</figcaption>
           </figure>
         </div>
@@ -278,7 +278,7 @@
           <p>Normally an LLM replies in free-flowing prose, which is hard for other software to use. <strong>Structured output</strong> forces the model to answer in a strict, predictable format — most often <strong>JSON</strong> — so a program can read it reliably.</p>
           <p><strong>Analogy:</strong> The difference between a friend casually telling you about an event ("yeah it's Friday-ish, downtown somewhere") versus a calendar invite with exact fields for date, time, and location. Machines need the calendar invite. For example, instead of a paragraph, an agent might return <code>{"action": "deploy", "environment": "staging", "approved": false}</code> — which the pipeline can act on automatically.</p>
           <figure class="my-6 rounded-xl overflow-hidden bg-white shadow-sm ring-1 ring-slate-200">
-            <img src="assets/diagrams/06-structured-output.svg" alt="Comparison of vague free-text agent output that pipelines cannot parse versus structured JSON with action, environment, and approved fields" class="w-full h-auto" loading="lazy" width="900" height="340" />
+            <img src="assets/diagrams/06-structured-output.png" alt="Comparison of vague free-text agent output that pipelines cannot parse versus structured JSON with action, environment, and approved fields" class="w-full h-auto" loading="lazy" width="900" height="340" />
             <figcaption class="px-4 py-2.5 text-xs text-slate-500 text-center bg-slate-50 border-t border-slate-100">Structured JSON lets CI/CD pipelines automate decisions reliably</figcaption>
           </figure>
         </div>
@@ -299,7 +299,7 @@
           <p><strong>Hooks</strong> are scripts that run automatically at specific moments — "when X happens, do Y." They let you insert your own logic into a process without changing its core.</p>
           <p><strong>Analogy:</strong> A motion-sensor light. You don't rewire the house; you just say "when motion is detected, turn on the light." In CI/CD and agent workflows, hooks fire on events like <em>before a commit</em>, <em>after tests run</em>, or <em>before an agent edits a file</em>. They are perfect for enforcing rules: a hook can block an agent's change if it would delete a critical file, or auto-run a code formatter after every edit.</p>
           <figure class="my-6 rounded-xl overflow-hidden bg-white shadow-sm ring-1 ring-slate-200">
-            <img src="assets/diagrams/07-mcp-hooks.svg" alt="MCP hub connecting AI agent to GitHub, database, and file system; hooks firing on pre-commit, post-test, and agent file-edit events" class="w-full h-auto" loading="lazy" width="900" height="380" />
+            <img src="assets/diagrams/07-mcp-hooks.png" alt="MCP hub connecting AI agent to GitHub, database, and file system; hooks firing on pre-commit, post-test, and agent file-edit events" class="w-full h-auto" loading="lazy" width="900" height="380" />
             <figcaption class="px-4 py-2.5 text-xs text-slate-500 text-center bg-slate-50 border-t border-slate-100">MCP standardizes tool connections; hooks inject logic at pipeline events</figcaption>
           </figure>
         </div>
@@ -325,7 +325,7 @@
           </ol>
           <p>This loop is why agents need everything we've covered: <strong>context</strong> and <strong>memory</strong> to know the situation, <strong>tools/MCP</strong> to act, <strong>structured output</strong> to make decisions software can execute, and <strong>hooks</strong> plus a strong <strong>system prompt</strong> to stay safe. Important beginner caution: because agents take real actions, they need <strong>guardrails</strong> and <strong>human-in-the-loop</strong> approval for risky steps.</p>
           <figure class="my-6 rounded-xl overflow-hidden bg-white shadow-sm ring-1 ring-slate-200">
-            <img src="assets/diagrams/08-agent-loop.svg" alt="Circular agent loop: Perceive, Reason, Act via tools, Observe, repeat, with human approval gate for risky production actions" class="w-full h-auto" loading="lazy" width="900" height="400" />
+            <img src="assets/diagrams/08-agent-loop.png" alt="Circular agent loop: Perceive, Reason, Act via tools, Observe, repeat, with human approval gate for risky production actions" class="w-full h-auto" loading="lazy" width="900" height="400" />
             <figcaption class="px-4 py-2.5 text-xs text-slate-500 text-center bg-slate-50 border-t border-slate-100">Agents loop until the goal is met — with human approval for high-risk steps</figcaption>
           </figure>
         </div>
@@ -356,7 +356,7 @@
           </ul>
           <p>Safety is non-negotiable here. Use <strong>hooks</strong> to enforce rules, a strict <strong>system prompt</strong> for guardrails, <strong>structured output</strong> so the pipeline can act on decisions, and <strong>human-in-the-loop approval</strong> before anything touches production.</p>
           <figure class="my-6 rounded-xl overflow-hidden bg-white shadow-sm ring-1 ring-slate-200">
-            <img src="assets/diagrams/09-cicd-agent.svg" alt="CI/CD pipeline from commit through build, test, approval gate, and deploy, with AI agent reading failed test logs and opening a fix pull request" class="w-full h-auto" loading="lazy" width="900" height="360" />
+            <img src="assets/diagrams/09-cicd-agent.png" alt="CI/CD pipeline from commit through build, test, approval gate, and deploy, with AI agent reading failed test logs and opening a fix pull request" class="w-full h-auto" loading="lazy" width="900" height="360" />
             <figcaption class="px-4 py-2.5 text-xs text-slate-500 text-center bg-slate-50 border-t border-slate-100">Agents sit alongside the pipeline — fixing failures intelligently, humans approve production</figcaption>
           </figure>
         </div>
@@ -392,7 +392,7 @@
           </ul>
           <p>The landscape changes fast, so focus on the <em>concepts</em> (which are stable) rather than memorizing brand names. Tools come and go; context, prompts, tools, memory, and the agent loop remain.</p>
           <figure class="my-6 rounded-xl overflow-hidden bg-white shadow-sm ring-1 ring-slate-200">
-            <img src="assets/diagrams/10-mvp-tools.svg" alt="MVP evolution from skateboard to car alongside categories of popular AI tools: chat models, coding IDEs, agent frameworks, CI/CD, and vector databases" class="w-full h-auto" loading="lazy" width="900" height="380" />
+            <img src="assets/diagrams/10-mvp-tools.png" alt="MVP evolution from skateboard to car alongside categories of popular AI tools: chat models, coding IDEs, agent frameworks, CI/CD, and vector databases" class="w-full h-auto" loading="lazy" width="900" height="380" />
             <figcaption class="px-4 py-2.5 text-xs text-slate-500 text-center bg-slate-50 border-t border-slate-100">Ship a skateboard first; learn the stable concepts behind the fast-changing tool landscape</figcaption>
           </figure>
         </div>
@@ -405,7 +405,7 @@
       <footer class="mt-16 border-t border-slate-200 pt-8 pb-12 text-sm text-slate-500">
         <p class="font-semibold text-slate-700">Agentic AI in CI/CD — Beginner Tutorial</p>
         <p class="mt-1">Built as a single-page, self-contained learning resource. Styling by Tailwind CSS. Free to adapt and share.</p>
-        <p class="mt-3 text-xs text-slate-400">Diagrams live in <code class="rounded bg-slate-100 px-1 py-0.5">assets/diagrams/</code> as editable SVG files.</p>
+        <p class="mt-3 text-xs text-slate-400">Diagrams are PNG images in <code class="rounded bg-slate-100 px-1 py-0.5">assets/diagrams/</code> (regenerate from SVG with <code class="rounded bg-slate-100 px-1 py-0.5">npm run build:diagrams</code>).</p>
       </footer>
 
     </main>

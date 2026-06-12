@@ -1,0 +1,25 @@
+{
+  "name": "agentic-ai-tute",
+  "version": "1.0.0",
+  "description": "A single-page, self-contained HTML tutorial covering Agentic AI concepts in a CI/CD context. Includes 100 interactive multiple-choice questions with detailed explanations.",
+  "main": "script.js",
+  "scripts": {
+    "build:diagrams": "node scripts/svg-to-png.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ninadrathod/agentic-ai-tute.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ninadrathod/agentic-ai-tute/issues"
+  },
+  "homepage": "https://github.com/ninadrathod/agentic-ai-tute#readme",
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2"
+  }
+}
